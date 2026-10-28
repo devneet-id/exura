@@ -9,14 +9,13 @@ document.documentElement.setAttribute('js', '');
 /* light / dark — no tag, state + effect only */
 Exura.module(class site {
   static init() {
-    let mode = null;
-    try { mode = localStorage.getItem('exura-mode'); } catch (e) {}
-    if (!mode) mode = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    let mode = 'dark'; // dark by default
+    try { mode = sessionStorage.getItem('exura-mode') || 'dark'; } catch (e) {}
     this.state.set('mode', mode);
     this.effect(() => {
       const dark = this.state.get('mode') === 'dark';
       document.documentElement.toggleAttribute('dark', dark);
-      try { localStorage.setItem('exura-mode', this.state.get('mode')); } catch (e) {}
+      try { sessionStorage.setItem('exura-mode', this.state.get('mode')); } catch (e) {}
     }, ['mode']);
   }
   static toggle() {

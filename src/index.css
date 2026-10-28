@@ -136,6 +136,15 @@ pre[panel] code {
 
 
 /* ============================================================
+ * FOOTER — DEVNEET project footer (one line, same on every project page)
+ * ============================================================ */
+
+footer a { text-decoration: none; }
+footer a small { color: var(--t-muted); }
+footer a:hover small { color: var(--t-text); }
+
+
+/* ============================================================
  * SMALL BITS
  * ============================================================ */
 
