@@ -1,0 +1,209 @@
+<!-- ============ NAVBAR ============ -->
+<header misc="p:sticky z:3" size="pt:1.5" style="top:0">
+  <div container>
+    <nav card="white sm" glass ring="b:full s:full" flex="j:between a:middle">
+      <a href="#top" flex="inline a:middle" style="text-decoration:none"><img logo="on-light" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title.svg" alt="Exura" height="26"><img logo="on-dark" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title-inverse.svg" alt="Exura" height="26"></a>
+      <div misc="d:none" lg:misc="d:block">
+        <ul list="dir:x sm" size="m:0">
+          <li><a href="#series">Series</a></li>
+          <li><a href="#exuracss">CSS</a></li>
+          <li><a href="#exurajs">JS</a></li>
+          <li><a href="#exuraphp">PHP</a></li>
+          <li><a href="#try">Try it</a></li>
+          <li><a href="#start">Get started</a></li>
+        </ul>
+      </div>
+      <div flex="a:middle">
+        <button button="sm" size="me:1" onclick="site.toggle()" aria-label="Toggle dark mode"><i clip="sleep"></i> Mode</button>
+        <a href="https://github.com/devneet-id" button="primary sm">GitHub</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section text="center" size="pt:10 pb:8" glow>
+    <div container>
+      <span card="primary:1 sm" ring="b:full b:primary-3" text="primary" misc="d:inline-block"><small text="primary">EXURA SERIES · 1.1</small></span>
+      <h1 text="display:1" size="mt:3 mb:2">A light foundation<br><span text="default f:300">for what you build next.</span></h1>
+      <p text="h5 default f:300" size="mb:4" style="max-width:640px;margin-left:auto;margin-right:auto">Three super-light frameworks, each a single file with no build step: <b text="f:600">exuracss</b> for the look, <b text="f:600">exurajs</b> for interaction, <b text="f:600">exuraphp</b> for the API. Use one, two, or all three.</p>
+      <div flex="j:center wrap">
+        <a href="#start" button="primary lg" size="m:0.5">Get started</a>
+        <a href="#series" button="lg" size="m:0.5">See the series <i clip="right"></i></a>
+      </div>
+      <div flex="j:center wrap" size="mt:3">
+        <small size="mx:1 my:0.5"><code>exuracss</code> ~21 KB</small>
+        <small size="mx:1 my:0.5"><code>exurajs</code> ~2 KB</small>
+        <small size="mx:1 my:0.5"><code>exuraphp</code> ~2 KB</small>
+        <small size="mx:1 my:0.5" text="default">gzip · MIT</small>
+      </div>
+
+      <!-- code window: exurajs tabs -->
+      <div card="white" glass ring="b:full s:full s:lg" size="mt:8 p:0" text="start" misc="o:hidden" style="max-width:880px;margin-left:auto;margin-right:auto">
+        <exura-demo>
+          <div flex="a:middle j:between wrap" ring="b:bottom" size="px:2 py:1">
+            <div flex="a:middle">
+              <button button="{{on_css}} sm" size="me:0.5" onclick="demo.show('css')">exuracss</button>
+              <button button="{{on_js}} sm" size="me:0.5" onclick="demo.show('js')">exurajs</button>
+              <button button="{{on_php}} sm" onclick="demo.show('php')">exuraphp</button>
+            </div>
+            <small>{{file}}</small>
+          </div>
+          <pre panel><code class="language-{{lang}}">{{code}}</code></pre>
+        </exura-demo>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ SERIES ============ -->
+  <section id="series" size="py:8" ring="b:top">
+    <div container>
+      <small text="primary uppercase">01 · The series</small>
+      <h2 text="display:4" size="mt:1">One idea, three layers</h2>
+      <p text="default" style="max-width:640px">Each package works alone. Together they cover a whole small web app — page, behaviour and API — with the same mindset: say what you want in plain words.</p>
+
+      <div flex="wrap" size="mt:3" style="margin-left:-.25rem;margin-right:-.25rem">
+
+        <div id="exuracss" size="w:full p:0.5" lg:size="w:1/3" reveal>
+          <div card="white" glass ring="s:full s:sm" size="h:full">
+            <span mark card="primary" size="p:0">css</span>
+            <h4 size="mt:2 mb:1">exuracss</h4>
+            <p text="default">Styling through attributes: <code>button</code>, <code>card</code>, <code>ring</code>, <code>flex</code>, <code>size</code>. Dark mode by reversal, responsive by prefix.</p>
+            <ul list="sm" size="mb:2 p:0">
+              <li><i clip="check"></i> <code>md:size="w:1/2"</code></li>
+              <li><i clip="check"></i> <code>&lt;body dark&gt;</code> anywhere</li>
+              <li><i clip="check"></i> colors from <code>exura.json</code></li>
+            </ul>
+            <a href="https://github.com/devneet-id/exuracss" button="sm">Repository <i clip="right"></i></a>
+          </div>
+        </div>
+
+        <div id="exurajs" size="w:full p:0.5" lg:size="w:1/3" reveal>
+          <div card="white" glass ring="s:full s:sm" size="h:full">
+            <span mark card="dark" size="p:0">js</span>
+            <h4 size="mt:2 mb:1">exurajs</h4>
+            <p text="default">Reactive modules in one small file: <code>state</code>, <code>effect</code>, <code>{{key}}</code> templates inside your own tags, a router and a DOM helper.</p>
+            <ul list="sm" size="mb:2 p:0">
+              <li><i clip="check"></i> <code>&lt;exura-counter&gt;</code> = module</li>
+              <li><i clip="check"></i> placeholders in attributes</li>
+              <li><i clip="check"></i> ~5 KB minified</li>
+            </ul>
+            <a href="https://github.com/devneet-id/exurajs" button="sm">Repository <i clip="right"></i></a>
+          </div>
+        </div>
+
+        <div id="exuraphp" size="w:full p:0.5" lg:size="w:1/3" reveal>
+          <div card="white" glass ring="s:full s:sm" size="h:full">
+            <span mark card="default" size="p:0">php</span>
+            <h4 size="mt:2 mb:1">exuraphp</h4>
+            <p text="default">JSON APIs in a single PHP file: modules per route, wildcards, a trace block for debugging and a clean <code>404</code>.</p>
+            <ul list="sm" size="mb:2 p:0">
+              <li><i clip="check"></i> <code>Exura::module('GET', 'user/*')</code></li>
+              <li><i clip="check"></i> errors become JSON</li>
+              <li><i clip="check"></i> no framework to learn</li>
+            </ul>
+            <a href="https://github.com/devneet-id/exuraphp" button="sm">Repository <i clip="right"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ TRY IT ============ -->
+  <section id="try" size="py:8" ring="b:top">
+    <div container>
+      <div flex="wrap a:middle">
+        <div size="w:full pe:0 mb:3" lg:size="w:1/2 pe:4" reveal>
+          <small text="primary uppercase">02 · Try it</small>
+          <h2 text="display:4" size="mt:1">exurajs + exuracss,<br><span text="default f:300">live on this page.</span></h2>
+          <p text="default">The card on the right is an <code>&lt;exura-counter&gt;</code> tag. Its template uses <code>{{count}}</code> in the text and <code>{{tone}}</code> inside exuracss attributes — change the number and the color follows.</p>
+<pre panel card="light" glass ring="b:full" size="mt:2"><code class="language-html">&lt;div card="{{tone}}:2"&gt;{{count}}&lt;/div&gt;
+
+&lt;script&gt;
+  // tone: primary above 0, secondary below
+  counter.state.set('count', n);
+&lt;/script&gt;</code></pre>
+        </div>
+        <div size="w:full" lg:size="w:1/2" reveal>
+          <exura-counter>
+            <div card="{{tone}}:2 lg" glass ring="b:full b:{{tone}}-5 s:full" text="center">
+              <small text="uppercase f:500">count</small>
+              <div text="display:2" size="my:1">{{count}}</div>
+              <p text="default" size="mb:3">{{label}}</p>
+              <div flex="j:center wrap">
+                <button button="sm" size="m:0.5" onclick="counter.add(-1)">− 1</button>
+                <button button="{{tone}} sm" size="m:0.5" onclick="counter.add(1)">+ 1</button>
+                <button button="none sm" size="m:0.5" text="default" onclick="counter.reset()">reset</button>
+              </div>
+            </div>
+          </exura-counter>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ PRINCIPLES ============ -->
+  <section size="py:8" ring="b:top">
+    <div container>
+      <small text="primary uppercase">03 · Principles</small>
+      <h2 text="display:4" size="mt:1">Small on purpose</h2>
+      <div flex="wrap" size="mt:3" style="margin-left:-.25rem;margin-right:-.25rem">
+        <div size="w:full p:0.5" md:size="w:1/2" lg:size="w:1/4" reveal>
+          <div card="light" glass size="h:full"><i clip="zap effect:isolate"></i><h5 size="mt:2 mb:1">No build step</h5><p text="default" size="m:0">One <code>&lt;link&gt;</code>, one <code>&lt;script&gt;</code>, one <code>require</code>.</p></div>
+        </div>
+        <div size="w:full p:0.5" md:size="w:1/2" lg:size="w:1/4" reveal>
+          <div card="light" glass size="h:full"><i clip="eyes effect:isolate"></i><h5 size="mt:2 mb:1">Readable markup</h5><p text="default" size="m:0">Attributes say what an element is, not a list of classes.</p></div>
+        </div>
+        <div size="w:full p:0.5" md:size="w:1/2" lg:size="w:1/4" reveal>
+          <div card="light" glass size="h:full"><i clip="sleep effect:isolate"></i><h5 size="mt:2 mb:1">Dark by reversal</h5><p text="default" size="m:0"><code>[dark]</code> flips the neutral pairs — on the page or one panel.</p></div>
+        </div>
+        <div size="w:full p:0.5" md:size="w:1/2" lg:size="w:1/4" reveal>
+          <div card="light" glass size="h:full"><i clip="heart effect:isolate"></i><h5 size="mt:2 mb:1">Open source</h5><p text="default" size="m:0">MIT, maintained by DEVNEET. Issues and PRs welcome.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ GET STARTED ============ -->
+  <section id="start" size="py:8" ring="b:top">
+    <div container text="center">
+      <h2 text="display:3" size="mb:2">Start with one line.<br><span text="default f:300">Add the rest when you need it.</span></h2>
+      <div card="light" glass ring="b:full" text="start" size="mt:3 p:0" style="max-width:820px;margin-left:auto;margin-right:auto">
+        <div flex="a:middle j:between" ring="b:bottom" size="px:2 py:1">
+          <small>index.html</small>
+          <button button="sm" onclick="copier.run(this, 'install-html')">Copy</button>
+        </div>
+<pre panel id="install-html"><code class="language-html">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devneet-id/exuracss@1.1.0/dist/exura.min.css"&gt;
+&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devneet-id/exuracss@1.1.0/dist/exura-clip.css"&gt; &lt;!-- icons, optional --&gt;
+&lt;script src="https://cdn.jsdelivr.net/gh/devneet-id/exurajs@1.1.0/dist/exura.min.js"&gt;&lt;/script&gt;</code></pre>
+        <div flex="a:middle j:between" ring="b:top b:bottom" size="px:2 py:1">
+          <small>index.php · <code>dist/exura.php</code> from the <a href="https://github.com/devneet-id/exuraphp/releases/tag/1.1.0">1.1.0 release</a></small>
+          <button button="sm" onclick="copier.run(this, 'install-php')">Copy</button>
+        </div>
+<pre panel id="install-php"><code class="language-php">require __DIR__ . '/exura.php';</code></pre>
+      </div>
+      <div flex="j:center wrap" size="mt:3">
+        <a href="https://github.com/devneet-id/exura/tree/main" button="primary lg" size="m:0.5">Read the docs</a>
+        <a href="https://github.com/devneet-id" button="lg" size="m:0.5">devneet-id on GitHub <i clip="right"></i></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+
+<!-- ============ FOOTER ============ -->
+<footer ring="b:top" size="py:5">
+  <div container flex="wrap j:between a:middle">
+    <span flex="inline a:middle"><img logo="on-light" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title.svg" alt="Exura" height="22"><img logo="on-dark" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title-inverse.svg" alt="Exura" height="22"><span text="default" size="ms:1 me:1">by</span><a href="https://github.com/devneet-id" flex="inline a:middle" text="default" style="text-decoration:none"><img src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/official/logo.svg" alt="DEVNEET" width="22" height="22" style="border-radius:4px"><span size="ms:1">DEVNEET</span></a><span text="default" size="ms:1">· MIT</span></span>
+    <small>© 2026 · built with exuracss &amp; exurajs</small>
+  </div>
+</footer>

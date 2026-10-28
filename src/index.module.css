@@ -1,0 +1,602 @@
+/* ============================================================
+ * EXURA — module-1 (temporary copy)
+ * Copied from exura-dev/themes/index.css (theme "modern").
+ * Remove this file once exuracss ships dist/exura-module-1.css,
+ * then load that file from the CDN in index.head.html instead.
+ * ============================================================ */
+
+
+/* ============================================================
+ * TOKENS
+ * ============================================================ */
+
+:root {
+  --font-used: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --t-radius-sm: 8px;
+  --t-radius: 12px;
+  --t-radius-lg: 18px;
+  --t-radius-xl: 22px;
+  --t-pill: 999px;
+  --t-ease: .2s ease;
+}
+
+/* colors come from exuracss (exura.json → COLOR); the theme only maps them to roles.
+ * Built on the reversible pairs, so the roles follow dark mode by themselves. */
+:root, [light], [dark] {
+  --t-bg: var(--color-white);
+  --t-surface: var(--color-light);
+  --t-line: var(--color-default-2);
+  --t-line-strong: var(--color-default-3);
+  --t-text: var(--color-dark);
+  --t-text-2: var(--color-dark-8);
+  --t-muted: var(--color-dark-6);
+  --t-faint: var(--color-dark-4);
+  --t-hover: var(--color-dark-1);
+}
+
+
+/* ============================================================
+ * BASE
+ * ============================================================ */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+body,
+[dark],
+[light] {
+  color: var(--t-text-2);
+  background-color: var(--t-bg);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--t-text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+h1 { letter-spacing: -0.035em; }
+h2 { letter-spacing: -0.03em; }
+
+p { margin-bottom: var(--size-pm-1-5); }
+
+a {
+  color: var(--t-text);
+  text-decoration: underline;
+  text-decoration-color: var(--t-line-strong);
+  text-underline-offset: 3px;
+  transition: color var(--t-ease), text-decoration-color var(--t-ease);
+}
+a:hover { text-decoration-color: var(--color-primary); }
+/* links shaped as a card (menus, tiles) — no underline, soft hover only where the card has no color */
+a[card] { text-decoration: none; }
+:where(a[card]:hover) { background-color: var(--t-hover); }
+
+::selection { background: var(--color-primary-3); color: var(--t-text); }
+
+hr { border-top: 1px solid var(--t-line); }
+
+small { color: var(--t-muted); }
+
+code {
+  padding: 2px 6px;
+  border: 1px solid var(--t-line);
+  border-radius: 6px;
+  background: var(--t-surface);
+  color: var(--t-text);
+  font-size: .85em;
+  font-weight: 400;
+}
+pre code { padding: 0; border: 0; background: none; }
+samp { border-color: var(--t-line); border-radius: 6px; background: var(--t-surface); }
+kbd {
+  border: 1px solid var(--t-line-strong);
+  border-radius: 6px;
+  background: var(--t-surface);
+  color: var(--t-text);
+  box-shadow: inset 0 -1px 0 var(--t-line-strong);
+  font-family: var(--font-code);
+}
+
+blockquote { color: var(--t-muted); }
+blockquote:before { width: 3px; background-color: var(--color-primary); }
+
+mark { padding: 0 3px; border-radius: 4px; background-color: var(--color-primary-2); color: var(--t-text); }
+
+strong, em { color: var(--t-text); }
+
+fieldset { border: 1px solid var(--t-line); border-radius: var(--t-radius); }
+
+
+/* ============================================================
+ * TEXT
+ * ============================================================ */
+
+[text~="display:1"],
+[text~="display:2"],
+[text~="display:3"],
+[text~="display:4"] {
+  color: var(--t-text);
+  font-weight: 600;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+[text~="display:1"] { font-size: clamp(2.6rem, 7vw, 5.4rem); }
+[text~="display:2"] { font-size: clamp(2.3rem, 6vw, 4.4rem); }
+[text~="display:3"] { font-size: clamp(2rem, 4.6vw, 3.4rem); }
+[text~="display:4"] { font-size: clamp(1.7rem, 3.4vw, 2.6rem); }
+
+/* metallic display text — graphite on light pages (silver in dark mode, see DARK) */
+[text~="display:1"], [text~="display:2"],
+[text~="display:3"], [text~="display:4"] {
+  padding-bottom: .06em;
+  background: linear-gradient(180deg, #0b0c0e 30%, #6b7078 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* words inside with their own text color keep it (e.g. a primary highlight) */
+:where([text~="display:1"], [text~="display:2"], [text~="display:3"], [text~="display:4"]) [text] {
+  -webkit-text-fill-color: currentColor;
+}
+/* a muted line inside display text stays plain grey (exuracss default), not metallic */
+:where([text~="display:1"], [text~="display:2"], [text~="display:3"], [text~="display:4"]) [text~="default"] {
+  -webkit-text-fill-color: var(--color-default);  /* opaque, so the metallic fill behind does not show through */
+}
+
+[text~="h1"], [text~="h2"], [text~="h3"],
+[text~="h4"], [text~="h5"], [text~="h6"] {
+  color: var(--t-text);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+[text~="default"] { color: var(--t-muted); }
+
+/* font weight f:100 … f:900 — Inter is variable (100..900); after headings so it wins */
+[text~="f:100"] { font-weight: 100; }
+[text~="f:200"] { font-weight: 200; }
+[text~="f:300"] { font-weight: 300; }
+[text~="f:400"] { font-weight: 400; }
+[text~="f:500"] { font-weight: 500; }
+[text~="f:600"] { font-weight: 600; }
+[text~="f:700"] { font-weight: 700; }
+[text~="f:800"] { font-weight: 800; }
+[text~="f:900"] { font-weight: 900; }
+
+
+/* ============================================================
+ * BUTTON — pill
+ * ============================================================ */
+
+/* shape defaults step aside when a utility asks (size p:/h:, misc d:, flex j:) — utilities always win */
+:where(button, [button]):not([misc*="d:"], [sm\:misc*="d:"], [md\:misc*="d:"], [lg\:misc*="d:"], [xl\:misc*="d:"], [xxl\:misc*="d:"]) { display: inline-flex; }
+:where(button, [button]):not([flex*="j:"]) { justify-content: center; }
+:where(button, [button]):not([size*="h:"]) { height: 40px; }
+:where(button, [button]):not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 18px; }
+:where(button, [button]):not([size*="m:"], [size*="mb:"], [size*="my:"]) { margin-bottom: 0; }
+button, [button] {
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--t-line-strong);
+  border-radius: var(--t-pill);
+  background-color: var(--t-bg);
+  color: var(--t-text);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: none;
+  transition: background-color var(--t-ease), border-color var(--t-ease), box-shadow var(--t-ease), color var(--t-ease);
+}
+button:hover, button:focus,
+[button]:hover, [button]:focus {
+  border-color: var(--color-default-4);
+  background-color: var(--t-hover);
+  box-shadow: none;
+}
+button:focus-visible, [button]:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--color-primary-2);
+}
+
+a[button=""] { border-color: transparent; background: transparent; color: var(--t-text); }
+
+[button~="sm"]:not([size*="h:"]) { height: 32px; }
+[button~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 12px; }
+[button~="sm"] { font-size: 13px; }
+[button~="lg"]:not([size*="h:"]) { height: 48px; }
+[button~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 26px; }
+[button~="lg"] { font-size: 15px; }
+
+[button~="none"],
+[button~="none"]:hover,
+[button~="none"]:focus {
+  height: auto;
+  padding: 0;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* solid variants keep their color (the plain rule above sets a page background) */
+[button~="default"] { background-color: var(--color-default); color: var(--color-fixed-white); }
+[button~="primary"] { background-color: var(--color-primary); color: var(--color-fixed-white); }
+[button~="secondary"] { background-color: var(--color-secondary); color: var(--color-fixed-white); }
+[button~="dark"] { background-color: var(--color-dark); color: var(--color-white); }
+[button~="light"] { background-color: var(--color-light); color: var(--color-black); }
+[button~="white"] { background-color: var(--color-white); color: var(--color-black); }
+[button~="black"] { background-color: var(--color-black); color: var(--color-white); }
+
+/* solid variants: no border, soft glow on hover */
+[button~="default"], [button~="primary"], [button~="secondary"],
+[button~="dark"], [button~="light"], [button~="white"], [button~="black"] {
+  border-color: transparent;
+  box-shadow: none;
+}
+[button~="primary"]:hover, [button~="primary"]:focus {
+  background-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 4px var(--color-primary-1), 0 8px 30px var(--color-primary-3);
+}
+[button~="secondary"]:hover, [button~="secondary"]:focus {
+  background-color: var(--color-secondary) !important;
+  box-shadow: 0 0 0 4px var(--color-secondary-1), 0 8px 30px var(--color-secondary-3);
+}
+[button~="default"]:hover, [button~="default"]:focus {
+  background-color: var(--color-default) !important;
+  box-shadow: 0 8px 24px var(--color-default-3);
+}
+[button~="dark"]:hover, [button~="dark"]:focus,
+[button~="black"]:hover, [button~="black"]:focus {
+  background-color: var(--color-dark-9) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
+}
+[button~="light"], [button~="white"] { border-color: var(--t-line); }
+[button~="light"]:hover, [button~="light"]:focus,
+[button~="white"]:hover, [button~="white"]:focus {
+  background-color: var(--color-white) !important;
+  border-color: var(--t-line-strong);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .08);
+}
+
+
+/* ============================================================
+ * CARD
+ * ============================================================ */
+
+/* padding steps aside for size="p:…" — utilities always win */
+:where([card]):not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 20px 24px; }
+[card] { border-radius: var(--t-radius-lg); }
+/* borders stay weaker than ring="…" so ring colors and sides always win */
+:where([card]) { border: 1px solid transparent; }
+[card~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 12px 14px; }
+[card~="sm"] { border-radius: var(--t-radius); }
+[card~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 32px 36px; }
+[card~="lg"] { border-radius: var(--t-radius-xl); }
+
+/* neutral surfaces get a hairline border */
+:where([card~="white"], [card~="light"],
+[card*="white:"], [card*="light:"],
+[card*="default:"], [card*="dark:"], [card*="black:"]) {
+  border-color: var(--t-line);
+}
+[card~="white"] { background-color: var(--t-bg); }
+[card~="light"] { background-color: var(--t-surface); }
+
+/* tinted brand cards: tint + matching hairline */
+[card*="primary:"] { color: var(--t-text); }
+[card*="secondary:"] { color: var(--t-text); }
+:where([card*="primary:"]) { border-color: var(--color-primary-2); }
+:where([card*="secondary:"]) { border-color: var(--color-secondary-2); }
+[card*="default:"] { color: var(--t-text); }
+
+
+/* ============================================================
+ * RING — hairline borders, soft rounded corners, soft shadows
+ * ============================================================ */
+
+/* line colors stay exura's (default-2 → any b:/o: color word) — the theme only softens the shape */
+[ring*="b:full"], [ring*="o:full"] { border-radius: var(--t-radius); }
+:where([ring*="o:"]) { outline-offset: 2px; }
+
+[ring~="s:full"]   { box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 8px 24px rgba(0, 0, 0, .08); }
+[ring~="s:top"]    { box-shadow: 0 -8px 24px rgba(0, 0, 0, .08); }
+[ring~="s:bottom"] { box-shadow: 0 8px 24px rgba(0, 0, 0, .08); }
+[ring~="s:start"]  { box-shadow: -8px 0 24px rgba(0, 0, 0, .08); }
+[ring~="s:end"]    { box-shadow: 8px 0 24px rgba(0, 0, 0, .08); }
+[ring~="s:full"][ring~="s:sm"] { box-shadow: 0 1px 2px rgba(0, 0, 0, .06), 0 2px 8px rgba(0, 0, 0, .05); }
+[ring~="s:full"][ring~="s:lg"] { box-shadow: 0 2px 4px rgba(0, 0, 0, .06), 0 24px 60px rgba(0, 0, 0, .14); }
+
+
+/* ============================================================
+ * LIST
+ * ============================================================ */
+
+[list] > * { padding: 12px 14px; }
+[list~="sm"] > * { padding: 8px 10px; }
+[list~="lg"] > * { padding: 16px 18px; }
+[list][ring*="b:full"] { overflow: hidden; }
+[list~="dir:x"] > * { padding-top: 6px; padding-bottom: 6px; }
+
+
+/* ============================================================
+ * TABLE
+ * ============================================================ */
+
+table { font-size: 14px; }
+table th, table td { padding: 12px 16px; }
+table th {
+  color: var(--t-faint);
+  font-family: var(--font-code);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+table td { color: var(--t-text-2); }
+table tbody tr:hover { background-color: var(--t-hover); }
+[table~="sm"] th, [table~="sm"] td { padding: 8px 12px; }
+[table~="lg"] th, [table~="lg"] td { padding: 16px 20px; }
+
+
+
+/* ============================================================
+ * FORM
+ * ============================================================ */
+
+label {
+  display: inline-block;
+  margin-bottom: 6px;
+  color: var(--t-text);
+  font-size: 13.5px;
+  font-weight: 500;
+}
+
+input, select, textarea {
+  height: 44px;
+  padding: 0 14px;
+  margin-bottom: 12px;
+  border: 1px solid var(--t-line-strong);
+  border-radius: 10px;
+  background-color: var(--t-bg);
+  color: var(--t-text);
+  font-family: inherit;
+  font-size: 14px;
+  transition: border-color var(--t-ease), box-shadow var(--t-ease);
+}
+textarea { height: auto; min-height: 110px; padding: 12px 14px; line-height: 1.6; resize: vertical; }
+input::placeholder, textarea::placeholder { color: var(--t-faint); }
+
+input[type]:hover, input:not([type]):hover,
+select:hover, textarea:hover {
+  border-color: var(--color-default-4);
+  background-color: var(--t-bg);
+}
+input[type]:focus, input:not([type]):focus,
+select:focus, textarea:focus {
+  border-color: var(--color-primary-6);
+  background-color: var(--t-bg);
+  box-shadow: 0 0 0 4px var(--color-primary-2);
+}
+
+input[type="checkbox"], input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  margin: 0 8px 0 0;
+  vertical-align: middle;
+  accent-color: var(--color-primary);
+}
+input[type="color"] { width: 56px; padding: 4px; }
+input[type="range"] { height: 4px; padding: 0; border: 0; background: var(--t-line-strong); accent-color: var(--color-primary); }
+input[type="range"]:focus { box-shadow: none; }
+input[type="range"]::-webkit-slider-runnable-track { height: 4px; background: var(--t-line-strong); }
+input[type="range"]::-webkit-slider-thumb { margin-top: -7px; border-width: 1px; border-color: var(--t-line-strong); box-shadow: 0 2px 6px rgba(0, 0, 0, .2); }
+input[type="range"]::-moz-range-track { height: 4px; background: var(--t-line-strong); }
+input[type="file"] { height: auto; padding: 10px 14px; }
+
+
+/* ============================================================
+ * CONTAINER — a narrower, calmer reading width
+ * ============================================================ */
+
+[container] { padding-left: 24px; padding-right: 24px; }
+[container~="overflow"] { padding: 0; }
+@media (min-width: 1280px) {
+  [container]:not([container~="fluid"]) { max-width: 1200px; }
+}
+
+
+/* ============================================================
+ * CLIP
+ * ============================================================ */
+
+/* isolate = a true circle: exura's fixed 25px width + padding squeezes the emoji into an oval.
+ * Size follows font-size (2em), the emoji sits in the middle; no padding needed. */
+[clip~="effect:isolate"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  font-size: .8rem;
+  line-height: 1;
+  vertical-align: middle;
+  border-radius: 999px;
+  /* border: 1px solid var(--t-line); */
+  background-color: var(--color-default-2);
+}
+[clip~="effect:isolate"]::before { transform: none; }
+
+
+/* ============================================================
+ * DARK — styles that only make sense on a dark surface
+ * Pattern: `[dark] component` (inside a dark area) + `[dark]component` (the area itself).
+ * Colors already flip through the reversible tokens; these add depth.
+ * ============================================================ */
+
+/* metallic: silver on dark */
+[dark] [text~="display:1"], [dark][text~="display:1"],
+[dark] [text~="display:2"], [dark][text~="display:2"],
+[dark] [text~="display:3"], [dark][text~="display:3"],
+[dark] [text~="display:4"], [dark][text~="display:4"] {
+  background-image: linear-gradient(180deg, #ffffff 30%, #a9b0b6 100%);
+}
+
+/* panels: a faint top-down sheen instead of a flat fill */
+[dark] [card~="white"], [dark][card~="white"],
+[dark] [card~="light"], [dark][card~="light"] {
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .03), rgba(255, 255, 255, .01));
+}
+
+/* shadows: dark pages need a hairline + deeper shadow to separate surfaces */
+[dark] [ring~="s:full"], [dark][ring~="s:full"] {
+  box-shadow: 0 0 0 1px var(--t-line), 0 20px 50px rgba(0, 0, 0, .5);
+}
+
+/* plain buttons and inputs: barely-there fill */
+[dark] button:not([button]), [dark] [button=""],
+[dark] input, [dark] select, [dark] textarea {
+  background-color: rgba(255, 255, 255, .02);
+}
+[dark] input[type="checkbox"], [dark] input[type="radio"], [dark] input[type="range"] {
+  background-color: transparent;
+}
+
+
+/* ============================================================
+ * RESPONSIVE — sizes follow the theme too
+ * ============================================================ */
+
+@media (min-width: 640px) {
+  [sm\:button~="sm"]:not([size*="h:"]) { height: 32px; }
+  [sm\:button~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 12px; }
+  [sm\:button~="sm"] { font-size: 13px; }
+  [sm\:button~="md"]:not([size*="h:"]) { height: 40px; }
+  [sm\:button~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 18px; }
+  [sm\:button~="md"] { font-size: 14px; }
+  [sm\:button~="lg"]:not([size*="h:"]) { height: 48px; }
+  [sm\:button~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 26px; }
+  [sm\:button~="lg"] { font-size: 15px; }
+  [sm\:button~="default"] { background-color: var(--color-default); color: var(--color-fixed-white); border-color: transparent; }
+  [sm\:button~="primary"] { background-color: var(--color-primary); color: var(--color-fixed-white); border-color: transparent; }
+  [sm\:button~="secondary"] { background-color: var(--color-secondary); color: var(--color-fixed-white); border-color: transparent; }
+  [sm\:button~="dark"] { background-color: var(--color-dark); color: var(--color-white); border-color: transparent; }
+  [sm\:button~="light"] { background-color: var(--color-light); color: var(--color-black); border-color: transparent; }
+  [sm\:button~="white"] { background-color: var(--color-white); color: var(--color-black); border-color: transparent; }
+  [sm\:button~="black"] { background-color: var(--color-black); color: var(--color-white); border-color: transparent; }
+  [sm\:card~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 12px 14px; }
+  [sm\:card~="sm"] { border-radius: var(--t-radius); }
+  [sm\:card~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 20px 24px; }
+  [sm\:card~="md"] { border-radius: var(--t-radius-lg); }
+  [sm\:card~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 32px 36px; }
+  [sm\:card~="lg"] { border-radius: var(--t-radius-xl); }
+}
+@media (min-width: 768px) {
+  [md\:button~="sm"]:not([size*="h:"]) { height: 32px; }
+  [md\:button~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 12px; }
+  [md\:button~="sm"] { font-size: 13px; }
+  [md\:button~="md"]:not([size*="h:"]) { height: 40px; }
+  [md\:button~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 18px; }
+  [md\:button~="md"] { font-size: 14px; }
+  [md\:button~="lg"]:not([size*="h:"]) { height: 48px; }
+  [md\:button~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 26px; }
+  [md\:button~="lg"] { font-size: 15px; }
+  [md\:button~="default"] { background-color: var(--color-default); color: var(--color-fixed-white); border-color: transparent; }
+  [md\:button~="primary"] { background-color: var(--color-primary); color: var(--color-fixed-white); border-color: transparent; }
+  [md\:button~="secondary"] { background-color: var(--color-secondary); color: var(--color-fixed-white); border-color: transparent; }
+  [md\:button~="dark"] { background-color: var(--color-dark); color: var(--color-white); border-color: transparent; }
+  [md\:button~="light"] { background-color: var(--color-light); color: var(--color-black); border-color: transparent; }
+  [md\:button~="white"] { background-color: var(--color-white); color: var(--color-black); border-color: transparent; }
+  [md\:button~="black"] { background-color: var(--color-black); color: var(--color-white); border-color: transparent; }
+  [md\:card~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 12px 14px; }
+  [md\:card~="sm"] { border-radius: var(--t-radius); }
+  [md\:card~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 20px 24px; }
+  [md\:card~="md"] { border-radius: var(--t-radius-lg); }
+  [md\:card~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 32px 36px; }
+  [md\:card~="lg"] { border-radius: var(--t-radius-xl); }
+}
+@media (min-width: 1024px) {
+  [lg\:button~="sm"]:not([size*="h:"]) { height: 32px; }
+  [lg\:button~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 12px; }
+  [lg\:button~="sm"] { font-size: 13px; }
+  [lg\:button~="md"]:not([size*="h:"]) { height: 40px; }
+  [lg\:button~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 18px; }
+  [lg\:button~="md"] { font-size: 14px; }
+  [lg\:button~="lg"]:not([size*="h:"]) { height: 48px; }
+  [lg\:button~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 26px; }
+  [lg\:button~="lg"] { font-size: 15px; }
+  [lg\:button~="default"] { background-color: var(--color-default); color: var(--color-fixed-white); border-color: transparent; }
+  [lg\:button~="primary"] { background-color: var(--color-primary); color: var(--color-fixed-white); border-color: transparent; }
+  [lg\:button~="secondary"] { background-color: var(--color-secondary); color: var(--color-fixed-white); border-color: transparent; }
+  [lg\:button~="dark"] { background-color: var(--color-dark); color: var(--color-white); border-color: transparent; }
+  [lg\:button~="light"] { background-color: var(--color-light); color: var(--color-black); border-color: transparent; }
+  [lg\:button~="white"] { background-color: var(--color-white); color: var(--color-black); border-color: transparent; }
+  [lg\:button~="black"] { background-color: var(--color-black); color: var(--color-white); border-color: transparent; }
+  [lg\:card~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 12px 14px; }
+  [lg\:card~="sm"] { border-radius: var(--t-radius); }
+  [lg\:card~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 20px 24px; }
+  [lg\:card~="md"] { border-radius: var(--t-radius-lg); }
+  [lg\:card~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 32px 36px; }
+  [lg\:card~="lg"] { border-radius: var(--t-radius-xl); }
+}
+@media (min-width: 1280px) {
+  [xl\:button~="sm"]:not([size*="h:"]) { height: 32px; }
+  [xl\:button~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 12px; }
+  [xl\:button~="sm"] { font-size: 13px; }
+  [xl\:button~="md"]:not([size*="h:"]) { height: 40px; }
+  [xl\:button~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 18px; }
+  [xl\:button~="md"] { font-size: 14px; }
+  [xl\:button~="lg"]:not([size*="h:"]) { height: 48px; }
+  [xl\:button~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 26px; }
+  [xl\:button~="lg"] { font-size: 15px; }
+  [xl\:button~="default"] { background-color: var(--color-default); color: var(--color-fixed-white); border-color: transparent; }
+  [xl\:button~="primary"] { background-color: var(--color-primary); color: var(--color-fixed-white); border-color: transparent; }
+  [xl\:button~="secondary"] { background-color: var(--color-secondary); color: var(--color-fixed-white); border-color: transparent; }
+  [xl\:button~="dark"] { background-color: var(--color-dark); color: var(--color-white); border-color: transparent; }
+  [xl\:button~="light"] { background-color: var(--color-light); color: var(--color-black); border-color: transparent; }
+  [xl\:button~="white"] { background-color: var(--color-white); color: var(--color-black); border-color: transparent; }
+  [xl\:button~="black"] { background-color: var(--color-black); color: var(--color-white); border-color: transparent; }
+  [xl\:card~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 12px 14px; }
+  [xl\:card~="sm"] { border-radius: var(--t-radius); }
+  [xl\:card~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 20px 24px; }
+  [xl\:card~="md"] { border-radius: var(--t-radius-lg); }
+  [xl\:card~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 32px 36px; }
+  [xl\:card~="lg"] { border-radius: var(--t-radius-xl); }
+}
+@media (min-width: 1536px) {
+  [xxl\:button~="sm"]:not([size*="h:"]) { height: 32px; }
+  [xxl\:button~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 12px; }
+  [xxl\:button~="sm"] { font-size: 13px; }
+  [xxl\:button~="md"]:not([size*="h:"]) { height: 40px; }
+  [xxl\:button~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 18px; }
+  [xxl\:button~="md"] { font-size: 14px; }
+  [xxl\:button~="lg"]:not([size*="h:"]) { height: 48px; }
+  [xxl\:button~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 0 26px; }
+  [xxl\:button~="lg"] { font-size: 15px; }
+  [xxl\:button~="default"] { background-color: var(--color-default); color: var(--color-fixed-white); border-color: transparent; }
+  [xxl\:button~="primary"] { background-color: var(--color-primary); color: var(--color-fixed-white); border-color: transparent; }
+  [xxl\:button~="secondary"] { background-color: var(--color-secondary); color: var(--color-fixed-white); border-color: transparent; }
+  [xxl\:button~="dark"] { background-color: var(--color-dark); color: var(--color-white); border-color: transparent; }
+  [xxl\:button~="light"] { background-color: var(--color-light); color: var(--color-black); border-color: transparent; }
+  [xxl\:button~="white"] { background-color: var(--color-white); color: var(--color-black); border-color: transparent; }
+  [xxl\:button~="black"] { background-color: var(--color-black); color: var(--color-white); border-color: transparent; }
+  [xxl\:card~="sm"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 12px 14px; }
+  [xxl\:card~="sm"] { border-radius: var(--t-radius); }
+  [xxl\:card~="md"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 20px 24px; }
+  [xxl\:card~="md"] { border-radius: var(--t-radius-lg); }
+  [xxl\:card~="lg"]:not([size*="p:"], [size*="pt:"], [size*="pb:"], [size*="ps:"], [size*="pe:"], [size*="px:"], [size*="py:"]) { padding: 32px 36px; }
+  [xxl\:card~="lg"] { border-radius: var(--t-radius-xl); }
+}

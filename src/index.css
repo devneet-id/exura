@@ -1,0 +1,172 @@
+/* ============================================================
+ * Homepage — page styles on top of exuracss + module-1
+ * Page hooks are attributes, not classes (same spirit as exuracss):
+ *   [glass] [logo] [panel] [mark] [reveal]
+ * ============================================================ */
+
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 96px; }
+
+
+/* ============================================================
+ * AMBIENT LIGHT — soft brand-coloured light behind everything
+ * ============================================================ */
+
+body {
+  position: relative;
+  background: transparent;
+  isolation: isolate;
+}
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .7;
+}
+body::before {
+  top: -20vh;
+  left: 50%;
+  width: 70vw;
+  height: 60vh;
+  margin-left: -35vw;
+  background: radial-gradient(closest-side, var(--color-primary-5), transparent);
+  animation: ambient-a 18s ease-in-out infinite alternate;
+}
+body::after {
+  bottom: -25vh;
+  right: -10vw;
+  width: 55vw;
+  height: 55vh;
+  background: radial-gradient(closest-side, var(--color-default-3), transparent);
+  animation: ambient-b 22s ease-in-out infinite alternate;
+}
+[dark] body::before { opacity: .75; }
+[dark] body::after  { opacity: .5; }
+
+@keyframes ambient-a {
+  from { transform: translate(-6vw, 0) scale(1); }
+  to   { transform: translate(6vw, 4vh) scale(1.12); }
+}
+@keyframes ambient-b {
+  from { transform: translate(0, 0) scale(1); }
+  to   { transform: translate(-8vw, -6vh) scale(1.1); }
+}
+
+/* hero glow (softer now that the page has ambient light) */
+[glow] {
+  background: radial-gradient(ellipse 60% 50% at 50% 0%, var(--color-primary-1), transparent 70%);
+}
+
+
+/* ============================================================
+ * GLASS — translucent cards over the ambient light
+ * add `glass` next to card="white|light" or any panel
+ * ============================================================ */
+
+[glass] {
+  background-color: rgba(255, 255, 255, .55);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .5), rgba(255, 255, 255, .15));
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-color: rgba(255, 255, 255, .6);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 10px 30px rgba(0, 0, 0, .06);
+}
+[dark] [glass] {
+  background-color: rgba(255, 255, 255, .035);
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, .06), rgba(255, 255, 255, .01));
+  border-color: rgba(255, 255, 255, .08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 20px 50px rgba(0, 0, 0, .45);
+}
+/* tinted glass keeps its colour (counter card="primary:2" etc.) */
+[glass][card*="primary:"]   { background-color: var(--color-primary-2); }
+[glass][card*="secondary:"] { background-color: var(--color-secondary-2); }
+[glass][card*="default:"]   { background-color: var(--color-default-2); }
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  [glass] { background-color: var(--t-bg); }
+}
+
+
+/* ============================================================
+ * LOGO — mreazenith/exura (devneet-id/.github), one per mode
+ * ============================================================ */
+
+[logo] { display: inline-block; vertical-align: middle; width: auto; }
+[logo="on-dark"] { display: none; }
+[dark] [logo="on-light"] { display: none; }
+[dark] [logo="on-dark"]  { display: inline-block; }
+
+
+/* ============================================================
+ * CODE — panels + highlight.js colours from exura tokens
+ * ============================================================ */
+
+pre[panel] {
+  margin: 0;
+  padding: 20px 24px;
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.7;
+  background: transparent;
+  border: 0;
+}
+pre[panel] code {
+  display: block;
+  background: transparent;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+  color: var(--t-text-2);
+}
+
+.hljs-tag, .hljs-name, .hljs-keyword, .hljs-built_in,
+.hljs-selector-tag, .hljs-meta .hljs-keyword        { color: var(--color-primary); }
+.hljs-attr, .hljs-attribute, .hljs-property,
+.hljs-variable, .hljs-params                       { color: var(--t-muted); }
+.hljs-string, .hljs-title, .hljs-title.class_,
+.hljs-title.function_, .hljs-number, .hljs-literal { color: var(--t-text); font-weight: 500; }
+.hljs-comment, .hljs-meta, .hljs-punctuation       { color: var(--t-faint); }
+.hljs-comment                                      { font-style: italic; }
+[dark] .hljs-tag, [dark] .hljs-name, [dark] .hljs-keyword,
+[dark] .hljs-built_in, [dark] .hljs-selector-tag   { color: var(--color-primary-9); }
+
+
+/* ============================================================
+ * SMALL BITS
+ * ============================================================ */
+
+/* package marks */
+[mark] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* glass cards lift a little on hover */
+[glass][card] { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+[reveal] > [glass]:hover { transform: translateY(-3px); }
+
+/* reveal on scroll (only when JS runs — see index.js) */
+html[js] [reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+html[js] [reveal][shown] { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  body::before, body::after { animation: none; }
+  html[js] [reveal] { opacity: 1; transform: none; transition: none; }
+  [glass][card] { transition: none; }
+}
