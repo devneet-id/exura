@@ -12,7 +12,7 @@
 
 | Value | Result |
 |---|---|
-| *(no value)* | centered, side padding `1rem`, max width follows the breakpoint (640 / 768 / 1024 / 1280 / 1536px) |
+| *(no value)* | centered, side padding `1rem`, max width follows the breakpoints in `exura.json` → `SCREEN` (640 / 768 / 1024 / 1280 / 1536px) |
 | `fluid` | full width, no side padding |
 | `overflow` | scrolls when the content is wider (good for tables and `<pre>`) |
 
@@ -21,7 +21,7 @@ Responsive: `md:container`, `lg:container="fluid"`…
 ## flex
 
 ```html
-<div flex="wrap j:between a:middle g:2">
+<div flex="wrap j:between a:middle">
   <div>left</div>
   <div flex="1">grows</div>
   <div>right</div>
@@ -38,12 +38,23 @@ Responsive: `md:container`, `lg:container="fluid"`…
 | justify `j:` | `start`, `center`, `end`, `between`, `around`, `evenly` | `justify-content` |
 | align items `a:` | `start`, `middle`, `end`, `stretch`, `baseline` | `align-items` |
 | align content `c:` | `start`, `center`, `end`, `between`, `around`, `evenly` | `align-content` |
-| gap `g:` | `0`, `1` (0.25rem), `2` (0.5rem), `3` (0.75rem), `4` (1rem), `5` (1.25rem), `6` (1.5rem) | `gap` |
-| gap per axis | `gx:1`, `gy:1` | `column-gap` / `row-gap` |
 | **item** grow | `1`, `auto`, `initial`, `none` | `flex` |
 | **item** self `s:` | `auto`, `start`, `center`, `end`, `stretch`, `baseline` | `align-self` |
 
 Responsive: `md:flex="d:row"`, `sm:flex="wrap"`…
+
+### Space between items
+
+exuracss has no `gap` utility. Give the **children padding** instead — fractions like `w:1/2` then still add up to 100% and stay on one line:
+
+```html
+<div flex="wrap">
+  <div size="w:1/2 p:1"><div card="primary:2">left</div></div>
+  <div size="w:1/2 p:1"><div card="primary:2">right</div></div>
+</div>
+```
+
+The outer element holds the width and the space; the inner element holds the look.
 
 ## size
 
@@ -93,10 +104,14 @@ Responsive: `md:size="w:1/2 p:3"`…
 | position `p:` | `static`, `relative`, `absolute`, `fixed`, `sticky` |
 | layer `z:` | `0` (0), `1` (100), `2` (500), `3` (1000), `4` (1500), `5` (2000) |
 | white space `ws:` | `wrap`, `nowrap`, `pre`, `pre-line`, `pre-wrap` |
+| overflow `o:` | `auto`, `hidden`, `scroll`, `visible`, `clip` |
+| overflow per axis `ox:` / `oy:` | same values, `overflow-x` / `overflow-y` |
 
 ```html
 <header card="dark" misc="p:sticky z:3" style="top:0">…</header>
 <nav misc="d:none" md:misc="d:block">…</nav>
+<div misc="oy:auto" style="max-height:20rem">scrolling panel</div>
+<div misc="ox:auto"><table>…</table></div>
 ```
 
 ## Example: responsive columns

@@ -17,12 +17,16 @@ Every `<button>` is styled; any element becomes a button with the `button` attri
 | Value | Result |
 |---|---|
 | *(none)* on `<button>` | soft grey (`default-3`) that follows dark mode |
-| `primary`, `secondary`, `dark`, `default`, `black` | solid color, white text, colored shadow |
-| `light`, `white` | solid light color, black text |
+| `primary`, `secondary`, `default` (and your own colors) | solid color, white text, colored shadow |
+| `dark`, `black` | solid dark, white text — reversed in dark mode |
+| `light`, `white` | solid light, black text — reversed in dark mode |
+| `sm` / `lg` | smaller / larger button: `button="primary sm"` |
 | `none` | no padding, no background |
 | `<a button>` (empty) | link color, transparent, no underline |
 
-Hover and focus darken the button and lift its shadow.
+Hover and focus lift the button's shadow.
+
+Responsive: `md:button="lg"`, `lg:button="secondary"` (colors and `sm` / `md` / `lg`).
 
 ## card
 
@@ -39,12 +43,16 @@ A padded block with a background and a matching text color.
 | `default`, `primary`, `secondary`, `dark`, `black` | the color | light |
 | `light`, `white` | the color | dark |
 | `name:1` … `name:10` | the shade | same as the base |
+| `sm` / `lg` | smaller / larger padding: `card="primary:2 lg"` |
 
-`card` takes **one value** — put spacing and borders in `size` and `ring`:
+`light`, `dark`, `white` and `black` cards are reversed in dark mode (see [Colors & dark mode](color.md)).
 
 ```html
-<div card="primary:2" ring="b:full b:primary-5" size="p:2 mb:1">…</div>
+<div card="primary:2 lg" ring="b:full b:primary-5">…</div>
+<div card="white" md:card="lg">small padding on phones, large from 768px</div>
 ```
+
+Responsive: `md:card="sm|md|lg"` (padding only).
 
 ## list
 
@@ -65,6 +73,14 @@ A padded block with a background and a matching text color.
 | `dir:y` / `dir:x` | stacked / in a row |
 | `wrap` | items wrap to the next line |
 | `ring:y` / `ring:x` | divider line between items |
+| `ring:<color>` | line color: `ring:primary-3`, `ring:dark` |
+| `sm` / `lg` | smaller / larger item padding |
+
+```html
+<ul list="dir:y ring:y ring:primary-3" md:list="dir:x ring:x">…</ul>
+```
+
+Responsive: `md:list="dir:x"`, `wrap`, `nowrap`, `ring:x`, `ring:y`, `ring:none`, `sm|md|lg` (the line color stays the one from `list`).
 
 ## table
 
@@ -84,6 +100,10 @@ Every `<table>` is full width with padded cells and a row hover.
 | `ring` | all cells |
 | `ring:x` | between columns |
 | `ring:y` | between rows |
+| `ring:<color>` | line color: `ring:primary-3` |
+| `sm` / `lg` | smaller / larger cell padding |
+
+Words combine: `table="ring:y ring:primary-3 sm"`. Responsive: `md:table="sm|md|lg"` (padding).
 
 Wrap wide tables in `container="overflow"` so they scroll on small screens.
 

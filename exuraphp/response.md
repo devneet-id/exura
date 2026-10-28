@@ -69,7 +69,7 @@ Exura::module('POST', 'notes', function() {
 
 ## Errors
 
-PHP warnings, notices and exceptions inside a module become JSON with status `500`:
+PHP warnings, errors and exceptions inside a module become JSON with status `500`:
 
 ```php
 Exura::module('GET', 'fail', function() {
@@ -92,6 +92,20 @@ Exura::module('GET', 'fail', function() {
 ```
 
 The error includes the file and line — keep that in mind before exposing an API publicly.
+
+Not everything fails the request:
+
+| PHP reports | Response |
+|---|---|
+| warning, error, exception | `500` with `error` |
+| deprecation, notice | normal response; listed under `notice` in the trace block |
+| anything silenced with `@`, or left out of `error_reporting()` | ignored |
+
+```php
+Exura::module('GET', 'len', function() {
+  return ['data' => strlen(null)];   // deprecated in PHP 8 → 200, noted in the trace
+});
+```
 
 ## 404
 

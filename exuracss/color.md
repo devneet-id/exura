@@ -39,24 +39,44 @@ Shades appear wherever a color is accepted:
 
 > `text` and `card` write a shade with `:` (`primary:5`), `ring` with `-` (`primary-5`).
 
-## Dark mode
+## Dark mode — reversal
 
 ```html
 <body dark>
 ```
 
-That is all. Dark mode only swaps the body text and background (`dark` on `white` → `light` on `black`).
-Everything else keeps its markup, because the default greys (`default-1` … `default-3`) used by inputs, buttons, hover states, list and table lines and rings are shades — they turn into dark greys on a light page and light greys on a dark page by themselves.
+Dark mode **reverses** the neutral pairs: `light ↔ dark` and `white ↔ black`, shades included. `primary`, `secondary`, `default` and any other color stay the same.
+
+| Written | Light mode | Dark mode |
+|---|---|---|
+| page | `dark` text on `white` | `light` text on `black` |
+| `text="dark"` | dark | light |
+| `card="white"` | white panel, dark text | black panel, light text |
+| `button="dark"` | dark button, white text | light button, black text |
+| `ring="b:full b:dark"` | dark line | light line |
+| `button="primary"` | blue, white text | unchanged |
+
+The default greys (`default-1` … `default-3`) used by inputs, buttons, hover states, list and table lines and rings are transparent shades, so they adapt to whatever is behind them.
+
+### On any element
+
+`dark` works on any element, not only `<body>` — a dark footer on a light page:
+
+```html
+<footer dark size="p:3">
+  <span text="dark">reads as light here</span>
+</footer>
+```
+
+`light` brings the normal pairs back inside a dark area — for a part that must stay light, or content that should not flip:
 
 ```html
 <body dark>
-  <div card="primary:2" ring="b:full b:primary-5" size="p:2">
-    Same markup, light or dark.
-  </div>
+  <div light card="white" size="p:2">always a white card with dark text</div>
 </body>
 ```
 
-Toggle it with one line:
+Toggle the whole page with one line:
 
 ```html
 <button button="primary" onclick="document.body.toggleAttribute('dark')">Dark mode</button>
@@ -64,8 +84,9 @@ Toggle it with one line:
 
 Tips:
 
-- Prefer **shades** (`primary:2`, `default-3`) for backgrounds and lines — they work on both sides.
-- Use **base colors** (`primary`, `dark`) for solid elements such as buttons and badges.
+- Use `dark` / `light` / `white` / `black` when a part should **flip** with the mode (page surfaces, neutral text, separators).
+- Use any other color (`primary`, `secondary`, your own) when it should **stay** the same.
+- Prefer **shades** (`primary:2`, `default-3`) for tinted backgrounds and lines — they work on both sides.
 - There is no separate dark palette to maintain.
 
 ## Add or change colors

@@ -46,12 +46,7 @@ Every concern has its **own attribute**. The value is a list of words separated 
 - **`prefix:value`** — most values are short pairs: `w:` width, `j:` justify, `a:` align, `b:` border…
 - **An attribute without a value** is a switch: `<div container>`, `<body dark>`.
 
-A few attributes take **exactly one value** — they cannot be combined with other words:
-
-| Attribute | One value only |
-|---|---|
-| `card` | `card="primary"` or `card="primary:3"` |
-| `table` | `table="ring"`, `table="ring:x"`, `table="ring:y"` |
+Most attributes also have a size word: `button="primary sm"`, `card="primary:2 lg"`, `list="sm"`, `table="lg"`.
 
 ## Responsive
 
@@ -70,7 +65,11 @@ Add a breakpoint in front of the attribute name. It applies **from that width up
 | `xl:` | 1280px |
 | `xxl:` | 1536px |
 
-Responsive prefixes work on **`size`**, **`flex`**, **`misc`** and **`container`**.
+Responsive prefixes work on **`size`**, **`flex`**, **`misc`**, **`container`**, **`button`**, **`card`** (size), **`list`**, **`ring`** (borders) and **`table`** (size).
+
+The design is **mobile-first**: the plain attribute is the phone layout, each prefix takes over from its width **until a larger prefix takes over** — with `md:` and `lg:` set, `md:` shows only from 768 to 1023px.
+
+Utilities always win over a component's own defaults: `misc="d:none"` hides a `text="h3"`, `md:flex="d:row"` turns a `list` into a row.
 
 ## Files in `dist/`
 

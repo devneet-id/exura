@@ -27,19 +27,37 @@ Without a color the border uses `default-2`, a soft grey that follows dark mode.
 
 ## Outline `o:`
 
-Same values as border — `o:full`, `o:dashed`, `o:2`, `o:primary-5` — drawn as an outline (it does not take space).
-Use `o:full`; the outline is always drawn around the whole element.
+`o:full` draws an outline around the whole element (it does not take space). Style, width and color work as for the border: `o:dashed`, `o:2`, `o:primary-5`.
+An outline has no sides — there is no `o:top` / `o:start`…; use a border for one side.
 
 ## Shadow `s:`
 
 | Value | Result |
 |---|---|
 | `s:full`, `s:top`, `s:bottom`, `s:start`, `s:end` | soft shadow on that side |
-| `+ s:lg` | larger blur |
+| `+ s:sm` / `+ s:lg` | smaller / larger blur |
 | `+ s:primary-3` (any color shade) | colored shadow |
 
 ```html
 <div ring="s:full s:lg s:primary-3">glowing card</div>
 ```
 
-> A plain side shadow (`s:full`, `s:bottom`…) is drawn only when it is the **only word** in `ring`. Together with a border, add a size or color: `ring="b:full s:full s:lg"` or `ring="b:full s:full s:primary-3"`.
+Shadow, border and outline can be combined in one `ring`: `ring="b:full s:full"`.
+
+## Responsive
+
+Borders can change per breakpoint — sides, style and width:
+
+```html
+<div ring="b:bottom b:primary-3" md:ring="b:full">underline on phones, full border from 768px</div>
+<div md:ring="b:none">…</div>
+```
+
+| Responsive value | Result |
+|---|---|
+| `b:full`, `b:top`, `b:bottom`, `b:start`, `b:end` | which sides are drawn |
+| `b:dashed`, `b:dotted`, `b:double` | style |
+| `b:2`, `b:3`, `b:4` | width |
+| `b:none` | no border |
+
+The color comes from the plain `ring` (`b:primary-3`); colors and shadows are not responsive.
