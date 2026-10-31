@@ -745,7 +745,81 @@ section[id] { scroll-margin-top: 96px; }
 
 
 /* ============================================================
- * AMBIENT LIGHT — soft brand-coloured light behind everything
+ * NAVBAR — DEVNEET project navbar (same as the Reliquary page)
+ * full width · transparent at the top · glass once scrolled
+ * ============================================================ */
+
+:root { --nav: 64px; }
+html { scroll-padding-top: calc(var(--nav) + 16px); }
+
+/* B A C K G R O U N D */
+#background {
+  position: fixed;
+  inset: 0;
+  background: url('https://i.pinimg.com/1200x/56/00/6b/56006b395adc268ceab30ef39e9a2d11.jpg') no-repeat center;
+  background-size: cover;
+  opacity: 0.15;
+  filter: blur(0px);
+  z-index: -2;
+}
+
+#navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid transparent;
+  transition: background-color .3s, border-color .3s;
+}
+#navbar > [container] { width: 100%; }
+#navbar[scrolled] {
+  background-color: rgba(255, 255, 255, .6);
+  border-bottom-color: var(--t-line);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+}
+[dark] #navbar[scrolled] {
+  background-color: rgba(7, 8, 10, .6);
+  border-bottom-color: rgba(255, 255, 255, .08);
+}
+#navbar a { text-decoration: none; }
+#navbar [links] a {
+  color: var(--t-muted);
+  font-size: .9rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+#navbar [links] a:hover { color: var(--t-text); background-color: var(--t-hover); }
+@media (min-width: 1024px) { #navbar [links] { display: flex; } }
+
+/* pill — small rounded link / button next to the menu */
+[pill] {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: auto;
+  padding: 6px 14px 6px 8px;
+  border: 1px solid var(--t-line-strong);
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, .5);
+  color: var(--t-text);
+  font-size: .85rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+[dark] [pill] { background-color: rgba(255, 255, 255, .035); border-color: rgba(255, 255, 255, .14); }
+[pill]:hover { border-color: var(--color-primary-6); color: var(--t-text); background-color: var(--t-hover); }
+
+/* the hero starts below the fixed navbar */
+main#top > section:first-child { padding-top: calc(var(--nav) + 72px); }
+
+
+/* ============================================================
+ * BACKGROUND & AURA — #background (image) and #aura (light) behind everything
  * ============================================================ */
 
 body {
@@ -753,41 +827,53 @@ body {
   background: transparent;
   isolation: isolate;
 }
-body::before,
-body::after {
-  content: "";
+
+/* A U R A — <div id="aura"> above #background (same layers as the Reliquary page):
+ * a still wash of brand light + two soft lights that drift slowly */
+#aura {
   position: fixed;
+  inset: 0;
   z-index: -1;
+  overflow: hidden;
   pointer-events: none;
+  background:
+    radial-gradient(600px 400px at 50% -5%, var(--color-primary-2), transparent 70%),
+    radial-gradient(500px 500px at 100% 60%, var(--color-default-1), transparent 70%),
+    radial-gradient(500px 500px at 0% 90%, var(--color-primary-1), transparent 70%);
+}
+#aura::before,
+#aura::after {
+  content: "";
+  position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: .7;
+  opacity: .6;
 }
-body::before {
+#aura::before {
   top: -20vh;
   left: 50%;
   width: 70vw;
   height: 60vh;
   margin-left: -35vw;
-  background: radial-gradient(closest-side, var(--color-primary-5), transparent);
-  animation: ambient-a 18s ease-in-out infinite alternate;
+  background: radial-gradient(closest-side, var(--color-primary-4), transparent);
+  animation: aura-a 18s ease-in-out infinite alternate;
 }
-body::after {
+#aura::after {
   bottom: -25vh;
   right: -10vw;
   width: 55vw;
   height: 55vh;
   background: radial-gradient(closest-side, var(--color-default-3), transparent);
-  animation: ambient-b 22s ease-in-out infinite alternate;
+  animation: aura-b 22s ease-in-out infinite alternate;
 }
-[dark] body::before { opacity: .75; }
-[dark] body::after  { opacity: .5; }
+[dark] #aura::before { opacity: .7; }
+[dark] #aura::after  { opacity: .45; }
 
-@keyframes ambient-a {
+@keyframes aura-a {
   from { transform: translate(-6vw, 0) scale(1); }
   to   { transform: translate(6vw, 4vh) scale(1.12); }
 }
-@keyframes ambient-b {
+@keyframes aura-b {
   from { transform: translate(0, 0) scale(1); }
   to   { transform: translate(-8vw, -6vh) scale(1.1); }
 }
@@ -911,35 +997,37 @@ html[js] [reveal][shown] { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  body::before, body::after { animation: none; }
+  #aura::before, #aura::after { animation: none; }
   html[js] [reveal] { opacity: 1; transform: none; transition: none; }
   [glass][card] { transition: none; }
 }
   </style>
 </head>
 <body>
-  <!-- ============ NAVBAR ============ -->
-<header misc="p:sticky z:3" size="pt:1.5" style="top:0">
-  <div container>
-    <nav card="white sm" glass ring="b:full s:full" flex="j:between a:middle">
-      <a href="#top" flex="inline a:middle" style="text-decoration:none"><img logo="on-light" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title.svg" alt="Exura" height="26"><img logo="on-dark" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title-inverse.svg" alt="Exura" height="26"></a>
-      <div misc="d:none" lg:misc="d:block">
-        <ul list="dir:x sm" size="m:0">
-          <li><a href="#series">Series</a></li>
-          <li><a href="#exuracss">CSS</a></li>
-          <li><a href="#exurajs">JS</a></li>
-          <li><a href="#exuraphp">PHP</a></li>
-          <li><a href="#try">Try it</a></li>
-          <li><a href="#start">Get started</a></li>
-        </ul>
+  <!-- background -->
+<div id="background"></div>
+<div id="aura"></div>
+
+
+<!-- ============ NAVBAR ============
+     DEVNEET project navbar — same as the Reliquary page: full width,
+     transparent at the top, glass once the page scrolls (index.js).
+     ============================================================ -->
+<nav id="navbar">
+  <div container flex="j:between a:middle">
+    <a href="#top" flex="inline a:middle"><img logo="on-light" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title.svg" alt="Exura" height="26"><img logo="on-dark" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title-inverse.svg" alt="Exura" height="26"></a>
+    <div flex="a:middle">
+      <div links flex="a:middle" misc="d:none" lg:misc="d:block">
+        <a href="#series">Series</a>
+        <a href="#try">Try it</a>
+        <a href="#start">Get started</a>
+        <a href="https://github.com/devneet-id/exura/tree/main">Docs</a>
       </div>
-      <div flex="a:middle">
-        <button button="sm" size="me:1" onclick="site.toggle()" aria-label="Toggle dark mode"><i clip="sleep"></i> Mode</button>
-        <a href="https://github.com/devneet-id" button="primary sm">GitHub</a>
-      </div>
-    </nav>
+      <button pill size="ms:1" onclick="site.toggle()" aria-label="Toggle dark mode"><i clip="sleep"></i> Mode</button>
+      <a pill size="ms:1" href="https://github.com/devneet-id/exura" target="_blank" rel="noopener"><i clip="link"></i> GitHub</a>
+    </div>
   </div>
-</header>
+</nav>
 
 
 <main id="top">
@@ -1305,6 +1393,13 @@ Exura.module(class copier {
     }
   }
 });
+
+
+/* navbar turns to glass once the page moves (same as the Reliquary page) */
+const navbar = document.getElementById('navbar');
+const glassNavbar = () => navbar.toggleAttribute('scrolled', window.scrollY > 8);
+window.addEventListener('scroll', glassNavbar, { passive: true });
+glassNavbar();
 
 
 /* reveal on scroll — Exura.watch */

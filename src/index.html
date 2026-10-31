@@ -1,25 +1,27 @@
-<!-- ============ NAVBAR ============ -->
-<header misc="p:sticky z:3" size="pt:1.5" style="top:0">
-  <div container>
-    <nav card="white sm" glass ring="b:full s:full" flex="j:between a:middle">
-      <a href="#top" flex="inline a:middle" style="text-decoration:none"><img logo="on-light" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title.svg" alt="Exura" height="26"><img logo="on-dark" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title-inverse.svg" alt="Exura" height="26"></a>
-      <div misc="d:none" lg:misc="d:block">
-        <ul list="dir:x sm" size="m:0">
-          <li><a href="#series">Series</a></li>
-          <li><a href="#exuracss">CSS</a></li>
-          <li><a href="#exurajs">JS</a></li>
-          <li><a href="#exuraphp">PHP</a></li>
-          <li><a href="#try">Try it</a></li>
-          <li><a href="#start">Get started</a></li>
-        </ul>
+<!-- background -->
+<div id="background"></div>
+<div id="aura"></div>
+
+
+<!-- ============ NAVBAR ============
+     DEVNEET project navbar — same as the Reliquary page: full width,
+     transparent at the top, glass once the page scrolls (index.js).
+     ============================================================ -->
+<nav id="navbar">
+  <div container flex="j:between a:middle">
+    <a href="#top" flex="inline a:middle"><img logo="on-light" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title.svg" alt="Exura" height="26"><img logo="on-dark" src="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo-title-inverse.svg" alt="Exura" height="26"></a>
+    <div flex="a:middle">
+      <div links flex="a:middle" misc="d:none" lg:misc="d:block">
+        <a href="#series">Series</a>
+        <a href="#try">Try it</a>
+        <a href="#start">Get started</a>
+        <a href="https://github.com/devneet-id/exura/tree/main">Docs</a>
       </div>
-      <div flex="a:middle">
-        <button button="sm" size="me:1" onclick="site.toggle()" aria-label="Toggle dark mode"><i clip="sleep"></i> Mode</button>
-        <a href="https://github.com/devneet-id" button="primary sm">GitHub</a>
-      </div>
-    </nav>
+      <button pill size="ms:1" onclick="site.toggle()" aria-label="Toggle dark mode"><i clip="sleep"></i> Mode</button>
+      <a pill size="ms:1" href="https://github.com/devneet-id/exura" target="_blank" rel="noopener"><i clip="link"></i> GitHub</a>
+    </div>
   </div>
-</header>
+</nav>
 
 
 <main id="top">

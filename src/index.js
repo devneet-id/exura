@@ -123,6 +123,13 @@ Exura.module(class copier {
 });
 
 
+/* navbar turns to glass once the page moves (same as the Reliquary page) */
+const navbar = document.getElementById('navbar');
+const glassNavbar = () => navbar.toggleAttribute('scrolled', window.scrollY > 8);
+window.addEventListener('scroll', glassNavbar, { passive: true });
+glassNavbar();
+
+
 /* reveal on scroll — Exura.watch */
 document.querySelectorAll('[reveal]').forEach((el) => {
   Exura.watch(el, () => el.setAttribute('shown', ''));
