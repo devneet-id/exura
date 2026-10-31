@@ -1,0 +1,25 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exura series — a light foundation for what you build next</title>
+<meta name="description" content="Three super-light frameworks, each a single file with no build step: exuracss for the look, exurajs for interaction, exuraphp for the API.">
+<meta property="og:title" content="Exura series — a light foundation for what you build next">
+<meta property="og:description" content="Three super-light frameworks, each a single file with no build step: exuracss for the look, exurajs for interaction, exuraphp for the API.">
+<meta name="theme-color" content="#090909">
+<link rel="icon" type="image/svg+xml" href="https://cdn.jsdelivr.net/gh/devneet-id/.github@main/design/mreazenith/exura/v1-logo.svg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- dark by default; a choice made with the Mode button lasts for this tab only (sessionStorage) -->
+<script>
+  (function () {
+    var mode = null;
+    try { mode = sessionStorage.getItem('exura-mode'); } catch (e) {}
+    if (mode !== 'light') document.documentElement.setAttribute('dark', '');
+  })();
+</script>
+<!-- code highlight (colours come from index.css, no theme file) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+
+<!-- exuracss, exura-clip, module-1 and exurajs are inlined by `php cast build` (sources: `php cast fetch`) -->
