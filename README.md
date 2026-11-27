@@ -21,7 +21,7 @@ Each mirrors what a modern framework in its field can do, packed into **a single
 require __DIR__ . '/exura.php';
 ```
 
-This repository is the **home of the series**: the introduction, how the packages fit together, and the documentation of each package.
+This repository is the **home of the series**: the introduction and the website. The documentation of each package lives in DEVNEET's lore: **[realms/exura](https://github.com/devneet-id/lore/tree/main/realms/exura)**.
 
 ## 🧩 The Series
 
@@ -102,7 +102,9 @@ Exura::fallback();   // nothing matched → 404 as JSON
 
 | Repository | Contains |
 |---|---|
-| [`exura`](https://github.com/devneet-id/exura) | this introduction and the documentation: `exuracss/`, `exurajs/`, `exuraphp/` |
+| [`exura`](https://github.com/devneet-id/exura) | this introduction and the website |
+| [`lore` · realms/exura](https://github.com/devneet-id/lore/tree/main/realms/exura) | the documentation of each package, and how to work on the series |
+| [`exura-dev`](https://github.com/devneet-id/exura-dev) | the workshop: scenarios and every component, against the released files |
 | [`exuracss`](https://github.com/devneet-id/exuracss) | `src/`, tokens (`exura.json`), `dist/exura.css`, `exura.min.css`, `exura-clip.css` |
 | [`exurajs`](https://github.com/devneet-id/exurajs) | `src/`, `dist/exura.js`, `exura.min.js` |
 | [`exuraphp`](https://github.com/devneet-id/exuraphp) | `src/`, `dist/exura.php`, `exura.min.php` |
@@ -129,13 +131,15 @@ php cast version --up          # bump the version
 
 ## 📚 Documentation
 
+The documentation lives in DEVNEET's lore, beside the story of the series:
+
 | Package | Start here | Pages |
 |---|---|---|
-| **exuracss** | [exuracss/](exuracss/README.md) | [colors & dark mode](exuracss/color.md) · [layout](exuracss/layout.md) · [text](exuracss/text.md) · [ring](exuracss/ring.md) · [components](exuracss/components.md) · [clip icons](exuracss/clip.md) · [customize](exuracss/customize.md) |
-| **exurajs** | [exurajs/](exurajs/README.md) | [module](exurajs/module.md) · [state, store & effect](exurajs/state.md) · [render & templates](exurajs/render.md) · [DOM helper](exurajs/dom.md) · [watch](exurajs/watch.md) · [router](exurajs/router.md) · [multi-page site](exurajs/pages.md) · [API](exurajs/api.md) |
-| **exuraphp** | [exuraphp/](exuraphp/README.md) | [routing](exuraphp/routing.md) · [request](exuraphp/request.md) · [response](exuraphp/response.md) · [API](exuraphp/api.md) |
+| **exuracss** | [exuracss](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/README.md) | [colors & dark mode](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/color.md) · [layout](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/layout.md) · [text](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/text.md) · [ring](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/ring.md) · [components](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/components.md) · [clip icons](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/clip.md) · [customize](https://github.com/devneet-id/lore/tree/main/realms/exura/exuracss/customize.md) |
+| **exurajs** | [exurajs](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/README.md) | [module](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/module.md) · [state, store & effect](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/state.md) · [render & templates](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/render.md) · [DOM helper](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/dom.md) · [watch](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/watch.md) · [router](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/router.md) · [multi-page site](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/pages.md) · [API](https://github.com/devneet-id/lore/tree/main/realms/exura/exurajs/api.md) |
+| **exuraphp** | [exuraphp](https://github.com/devneet-id/lore/tree/main/realms/exura/exuraphp/README.md) | [routing](https://github.com/devneet-id/lore/tree/main/realms/exura/exuraphp/routing.md) · [request](https://github.com/devneet-id/lore/tree/main/realms/exura/exuraphp/request.md) · [response](https://github.com/devneet-id/lore/tree/main/realms/exura/exuraphp/response.md) · [API](https://github.com/devneet-id/lore/tree/main/realms/exura/exuraphp/api.md) |
 
-Later the same pages will be published with GitHub Pages — styled and made interactive with Exura itself.
+Working on Exura itself? Start with [Working on this realm](https://github.com/devneet-id/lore/tree/main/realms/exura#working-on-this-realm).
 
 ## 🤝 Contributing
 
